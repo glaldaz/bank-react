@@ -1,4 +1,5 @@
 # Bank React
+![screenshot](./screenshot.png)
 
 ## Description
 This project is a bank application that builds a front end in React and a back end using MongoDB.
@@ -8,8 +9,6 @@ This project is a bank application that builds a front end in React and a back e
 - Run `npm install` in the console from the same directory as the project
 - Run `node index.js`
 - open `http://localhost:3000/#/` in the browser
-
-    insert image
 
 ## Technology Used
 This project uses React for the front end. The server (index.js) uses express to create routs. The backend is implemented with MongoDB.
