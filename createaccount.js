@@ -24,14 +24,14 @@ function CreateMsg(props) {
 }
 
 function CreateForm(props) {
-    const [name, setName]         = React.useStat('');
+    const [name, setName]         = React.useState('');
     const [email, setEmail]       = React.useState('');
     const [password, setPassword] = React.useState('');
     const ctx = React.useContext(UserContext);
 
     function handle() {
         console.log(name, email, password);
-        ctx.user.push({name, email, password});
+        ctx.users.push({name, email, password});
         props.setShow(false);
     }
 
@@ -42,7 +42,7 @@ function CreateForm(props) {
             className="form-control"
             placeholder="Enter name"
             value={name}
-            onChange={e => setName(e.currenttarget.valeu)} /><br/>
+            onChange={e => setName(e.currentTarget.value)} /><br/>
         
         Email address<br/>
         <input type="input"
