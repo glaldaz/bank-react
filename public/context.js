@@ -23,10 +23,13 @@ function Card(props){
                     email={props.email}
                     password={props.password}
                     showSubmit={props.showSubmit}
+                    buttonText={props.buttonText}
                     handle={props.handle}
                 ></CreateForm> :
                 <CreateMsg
                     setShow={setShow}
+                    successText={props.successText}
+                    successMessage={props.successMessage}
                 ></CreateMsg>}
                 {props.status && (<div id='createStatus'>{props.status}</div>)}
             </div>
@@ -44,10 +47,11 @@ function CreateMsg(props) {
 }
 
 function CreateForm(props) {
-    const [name, setName, showName] = props.name;//[name, setName]         = React.useState('');
-    const [email, setEmail, showEmail]= props.email;//[email, setEmail]       = React.useState('');
-    const [password, setPassword, showPassword] = props.password;//[password, setPassword] = React.useState('');
+    const [name, setName, showName] = (props.name ? props.name : [null,null,false]);
+    const [email, setEmail, showEmail] = (props.email ? props.email : [null,null,false]);
+    const [password, setPassword, showPassword] = (props.password ? props.password : [null,null,false]);
     const showSubmit = props.showSubmit;
+    const buttonText = props.buttonText;
 
     return (<>
         {showName &&
@@ -85,7 +89,7 @@ function CreateForm(props) {
         <div>
             <button type="submit"
                 className="btn btn-light"
-                onClick={props.handle}>Create Account</button>
+                onClick={props.handle}>{buttonText}</button>
         </div>}
     </>);
 }

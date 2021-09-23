@@ -3,7 +3,9 @@ function CreateAccount(){
     const [email, setEmail]       = React.useState('');
     const [password, setPassword] = React.useState('');
     const [show, setShow]         = React.useState(true);
-    const ctx = React.useContext(UserContext);
+    const buttonText = "Create Account";
+    const successMessage = "You have successfully created your Account.";
+    const successButton = "Add Another account";
 
     const handle = function() {
         console.log(name, email, password);
@@ -25,7 +27,10 @@ function CreateAccount(){
             password={[password, setPassword, true]}
             show={[show, setShow]}
             showSubmit={true}
+            buttonText={buttonText}
             handle={handle}
+            successMessage={successMessage}
+            successButton={successButton}
         />
     )
 }
