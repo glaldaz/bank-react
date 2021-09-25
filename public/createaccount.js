@@ -35,7 +35,7 @@ function CreateAccount(){
                         var data = await res.json();
                         console.log(data);
                     })();
-                    console.log("clearing form");
+                    //UserContext.push({name,email});
                     clearForm(setShow);
                 }
                 onAuthStatCalled = true;

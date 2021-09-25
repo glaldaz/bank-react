@@ -6,8 +6,6 @@ function Login() {
     const successMessage = "You have successfully logged in.";
     const successButton = "Sign out";
 
-    import { initializeApp } from "firebase/app";
-
 
     const handle = function() {
         const firebaseConfig = {
