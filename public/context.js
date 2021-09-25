@@ -22,6 +22,7 @@ function Card(props){
                     name = {props.name}
                     email={props.email}
                     password={props.password}
+                    deposit={props.deposit}
                     showSubmit={props.showSubmit}
                     buttonText={props.buttonText}
                     handle={props.handle}
@@ -30,6 +31,7 @@ function Card(props){
                     setShow={setShow}
                     successText={props.successText}
                     successMessage={props.successMessage}
+                    successButton={props.successButton}
                 ></CreateMsg>}
                 {props.status && (<div id='createStatus'>{props.status}</div>)}
             </div>
@@ -39,10 +41,10 @@ function Card(props){
 
 function CreateMsg(props) {
     return(<>
-            <h5>Success</h5>
+            <h5>{props.successMessage}</h5>
             <button type="submit" 
                 className="btn btn-light" 
-                onClick={() => props.setShow(true)}>Add another account</button>
+                onClick={() => props.setShow(true)}>{props.successButton}</button>
         </>)
 }
 
@@ -50,6 +52,7 @@ function CreateForm(props) {
     const [name, setName, showName] = (props.name ? props.name : [null,null,false]);
     const [email, setEmail, showEmail] = (props.email ? props.email : [null,null,false]);
     const [password, setPassword, showPassword] = (props.password ? props.password : [null,null,false]);
+    const [deposit, setDeposit, showDeposit] = (props.deposit ? props.deposit : [null,null,false]);
     const showSubmit = props.showSubmit;
     const buttonText = props.buttonText;
 
@@ -83,6 +86,16 @@ function CreateForm(props) {
                 value={password}
                 onChange={e => setPassword(e.currentTarget.value)} /><br/>
         </div>}
+
+        {showDeposit &&
+        <div>
+            Deposit<br/>
+            <input type="input"
+                className="form-control"
+                placeholder="Enter deposit Amount"
+                value={deposit}
+                onChange={e => setDeposit(e.currentTarget.value)} /><br/>
+        </div>}
         
 
         {showSubmit &&
@@ -92,4 +105,13 @@ function CreateForm(props) {
                 onClick={props.handle}>{buttonText}</button>
         </div>}
     </>);
+}
+
+function clearForm() {
+    let inputs = document.getElementsByClassName('form-control');
+    for (let input of inputs) {
+        console.log(input.value)
+        input.value = "";
+        console.log(input.value)
+    }
 }

@@ -5,17 +5,45 @@ function CreateAccount(){
     const [show, setShow]         = React.useState(true);
     const buttonText = "Create Account";
     const successMessage = "You have successfully created your Account.";
-    const successButton = "Add Another account";
+    const successButton = "Add another account";
 
     const handle = function() {
-        console.log(name, email, password);
-        const url = `/account/create/${name}/${email}/${password}`;
-        (async () => {
-            var res = await fetch(url);
-            var data = await res.json();
-            console.log(data);
-        })();
-        setShow(false);
+        //Add firebase user
+        const firebaseConfig = {
+            apiKey: "AIzaSyDJSTyduBDbfLu0aciBQjSQWnvZb8Q78RM",
+            authDomain: "bank-firbase-project.firebaseapp.com",
+            projectId: "bank-firbase-project",
+            storageBucket: "bank-firbase-project.appspot.com",
+            messagingSenderId: "32299882540",
+            appId: "1:32299882540:web:e92e65a2a66c9af63d9989"
+        };
+        
+        firebase.initializeApp(firebaseConfig);
+
+        const auth = firebase.auth();
+        auth.createUserWithEmailAndPassword(email, password);
+        
+        // login state
+        let onAuthStatCalled = false;
+        firebase.auth().onAuthStateChanged(user => {
+            if (user) {
+                if(!onAuthStatCalled) {
+                    console.log(name, email, password);
+                    const url = `/account/create/${name}/${email}/${password}/`;
+                    (async () => {
+                        var res = await fetch(url);
+                        var data = await res.json();
+                        console.log(data);
+                    })();
+                    console.log("clearing form");
+                    clearForm(setShow);
+                }
+                onAuthStatCalled = true;
+            }
+            else {
+                console.log('User is not logged in');
+            }
+        })
     }
 
     return (
