@@ -10,15 +10,15 @@ function Card(props){
         const txt = props.txtcolor ? ' text' + props.txtcolor: ' text-white';
         return 'card mb-3 ' + bg + txt;
     }
-    const [show, setShow] = props.show;
-    clearForm();
+    const [show, setShow] = (props.show ? props.show : [false, null]);
 
     return (
         <div className={classes()} style={{maxwidth: "18rem"}}>
             <div className="card-header">{props.header}</div>
             <div className="card-body">
                 {props.title && (<h5 className="card-title">{props.title}</h5>)}
-                {props.text && (<p className="card-text">{props.txt}</p>)}
+                {props.text && (<p className="card-text">{props.text}</p>)}<br/>
+                {props.showImage && (<img src="bank.png" className="img-fluid" alt="Responsive image"/>)}
                 {show ? <CreateForm
                     name = {props.name}
                     email={props.email}
@@ -50,10 +50,10 @@ function CreateMsg(props) {
 }
 
 function CreateForm(props) {
-    const [name, setName, showName] = (props.name ? props.name : [null,null,false]);
-    const [email, setEmail, showEmail] = (props.email ? props.email : [null,null,false]);
+    const [name,     setName,     showName]     = (props.name     ? props.name     : [null,null,false]);
+    const [email,    setEmail,    showEmail]    = (props.email    ? props.email    : [null,null,false]);
     const [password, setPassword, showPassword] = (props.password ? props.password : [null,null,false]);
-    const [deposit, setDeposit, showDeposit] = (props.deposit ? props.deposit : [null,null,false]);
+    const [deposit,  setDeposit,  showDeposit]  = (props.deposit  ? props.deposit  : [null,null,false]);
     const showSubmit = props.showSubmit;
     const buttonText = props.buttonText;
 

@@ -10,7 +10,6 @@ function CreateAccount(){
     const successButton = "Add another account";
 
     const context = React.useContext(UserContext);
-    const ctx = context.myUser;
     const setCtx = context.setMyUser;
 
     const handle = function() {
