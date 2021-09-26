@@ -21,6 +21,19 @@ function create(name, email, password) {
     });
 }
 
+// one user
+function one(passedEmail) {
+    //console.log(passedEmail);
+    return new Promise((resolve, reject) => {
+        const customer = db
+        .collection('users')
+        .find({email:(passedEmail)})
+        .toArray(function(err, docs) {
+            err ? reject(err) : resolve(docs[0]);
+        });
+    });
+}
+
 // all users
 function all() {
     return new Promise((resolve, reject) => {
@@ -33,4 +46,4 @@ function all() {
     });
 }
 
-module.exports = {create, all};
+module.exports = {create, one, all};

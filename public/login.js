@@ -5,7 +5,8 @@ function Login() {
     const buttonText = "Login";
     const successMessage = "You have successfully logged in.";
     const successButton = "Sign out";
-
+    const context = React.useContext(UserContext);
+    const setCtx = context.setMyUser;
 
     const handle = function() {
         const firebaseConfig = {
@@ -17,16 +18,32 @@ function Login() {
             appId: "1:32299882540:web:e92e65a2a66c9af63d9989"
         };
         
-        const app = initializeApp(firebaseConfig);
-        
-        // const url = `/account/create/${name}/${email}/${password}`;
-        // (async () => {
-        //     var res = await fetch(url);
-        //     var data = await res.json();
-        //     console.log(data);
-        // })();
-        clearForm();
-        setShow(false);
+        firebase.initializeApp(firebaseConfig);
+
+        const auth = firebase.auth();
+        auth.signInWithEmailAndPassword(email, password);
+
+        // login state
+        let onAuthStatCalled = false;
+        firebase.auth().onAuthStateChanged(user => {
+            if (user) {
+                if(!onAuthStatCalled) {
+                    const url = `/account/one/${email}`;
+                    (async () => {
+                        var res = await fetch(url);
+                        var data = await res.json();
+                        console.log(data);
+                        setCtx({user:data});
+                    })();
+                    setShow(false);
+                    clearForm();
+                }
+                onAuthStatCalled = true;
+            }
+            else {
+                console.log('User is not logged in');
+            }
+        })
     }
 
     return (

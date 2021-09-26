@@ -1,3 +1,5 @@
+const UserContext = React.createContext('');
+
 function CreateAccount(){
     const [name, setName]         = React.useState('');
     const [email, setEmail]       = React.useState('');
@@ -7,7 +9,12 @@ function CreateAccount(){
     const successMessage = "You have successfully created your Account.";
     const successButton = "Add another account";
 
+    const context = React.useContext(UserContext);
+    const ctx = context.myUser;
+    const setCtx = context.setMyUser;
+
     const handle = function() {
+
         //Add firebase user
         const firebaseConfig = {
             apiKey: "AIzaSyDJSTyduBDbfLu0aciBQjSQWnvZb8Q78RM",
@@ -28,15 +35,16 @@ function CreateAccount(){
         firebase.auth().onAuthStateChanged(user => {
             if (user) {
                 if(!onAuthStatCalled) {
-                    console.log(name, email, password);
-                    const url = `/account/create/${name}/${email}/${password}/`;
+                    //console.log(name, email, password);
+                    const url = `/account/create/${name}/${email}/${password}`;
                     (async () => {
                         var res = await fetch(url);
                         var data = await res.json();
-                        console.log(data);
+                        setCtx({user:data});
+                        console.log("ctx is: ");
+                        console.log(context.myUser);
                     })();
-                    //UserContext.push({name,email});
-                    clearForm(setShow);
+                    setShow(false);
                 }
                 onAuthStatCalled = true;
             }

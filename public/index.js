@@ -1,8 +1,9 @@
 function Spa(){
+    const [myUser, setMyUser] = React.useState({user:null});
     return(
         <HashRouter>
             <div>
-                <UserContext.Provider value={''}>
+                <UserContext.Provider value={{myUser, setMyUser}}>
                     <NavBar/>
                     <div className="container" style={{padding: "20px"}}>
                         <Rout path="/"         exact component={Home}/>

@@ -11,11 +11,10 @@ function Card(props){
         return 'card mb-3 ' + bg + txt;
     }
     const [show, setShow] = props.show;
+    clearForm();
 
-    const ctx = React.useContext(UserContext);
     return (
         <div className={classes()} style={{maxwidth: "18rem"}}>
-            userContext = {ctx}<br/>
             <div className="card-header">{props.header}</div>
             <div className="card-body">
                 {props.title && (<h5 className="card-title">{props.title}</h5>)}
@@ -112,8 +111,6 @@ function CreateForm(props) {
 function clearForm() {
     let inputs = document.getElementsByClassName('form-control');
     for (let input of inputs) {
-        console.log(input.value)
         input.value = "";
-        console.log(input.value)
     }
 }

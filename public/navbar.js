@@ -2,8 +2,9 @@
 const UserContext = React.createContext('');
 
 function NavBar(){
-  const ctx = React.useContext(UserContext);
-  console.log(ctx);
+  const context = React.useContext(UserContext);
+  const ctx = context.myUser;
+  const setCtx = context.setMyUser;
     return(
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <a className="navbar-brand" href="#">BadBank</a>
@@ -12,13 +13,13 @@ function NavBar(){
         </button>
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav">
-            {ctx && <li className="nav-item">
+            {ctx.user && <li className="nav-item">
               <a className="nav-link" href="#/deposit/">Deposit</a>
             </li>}
-            {ctx && <li className="nav-item">
+            {ctx.user && <li className="nav-item">
               <a className="nav-link" href="#/withdraw/">Withdraw</a>
             </li>}
-            {ctx && <li className="nav-item">
+            {ctx.user && <li className="nav-item">
               <a className="nav-link" href="#/balance/">Balance</a>
             </li>}
             <li className="nav-item">
@@ -27,16 +28,16 @@ function NavBar(){
           </ul>
 
           <ul className="navbar-nav ml-auto">
-            {ctx && <li className="nav-item">
-              <a className="nav-link" href="#/balance/">{ctx}</a>
+            {ctx.user && <li className="nav-item">
+              <a className="nav-link" href="#/balance/">{ctx.user.name}</a>
             </li>}
-            {ctx &&<li className="nav-item">
+            {ctx.user &&<li className="nav-item">
               <a className="nav-link" href="">Sign Out</a>
             </li>}
-            {!(ctx) && <li className="nav-item">
+            {!(ctx.user) && <li className="nav-item">
               <a className="nav-link" href="#/login/">Login</a>
             </li>}
-            {!(ctx) && <li className="nav-item">
+            {!(ctx.user) && <li className="nav-item">
               <a className="nav-link" href="#/CreateAccount/">Create Account</a>
             </li>}
           </ul>
