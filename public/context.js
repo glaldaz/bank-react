@@ -63,6 +63,7 @@ function CreateForm(props) {
     const context = React.useContext(UserContext);
     const ctx = context.myUser.user;
 
+    console.log("showBalance is: " + showBalance);
     return (<>
         {showName &&
         <div>
@@ -96,7 +97,7 @@ function CreateForm(props) {
 
         {showBalance &&
         <div>
-            Your balance is: {ctx.balance}
+            Your balance is: ${ctx.balance}<br/><br/>
         </div>}
 
         {showDeposit &&
