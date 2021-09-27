@@ -24,34 +24,50 @@ function CreateAccount(){
             messagingSenderId: "32299882540",
             appId: "1:32299882540:web:e92e65a2a66c9af63d9989"
         };
-        
-        firebase.initializeApp(firebaseConfig);
+
+        if (!firebase.apps.length) {
+            firebase.initializeApp(firebaseConfig);
+        }
 
         const auth = firebase.auth();
-        auth.createUserWithEmailAndPassword(email, password);
+        auth.createUserWithEmailAndPassword(email, password)
+            .then( () => {
+                const url = `/account/create/${name}/${email}/${password}`;
+                (async () => {
+                    var res = await fetch(url);
+                    var data = await res.json();
+                    setCtx({user:data});
+                    console.log("ctx is: ");
+                    console.log(context.myUser);
+                })();
+                setShow(false);
+            })
+            .catch( error => {
+                console.log('User is not logged in');
+            })
         
         // login state
-        let onAuthStatCalled = false;
-        firebase.auth().onAuthStateChanged(user => {
-            if (user) {
-                if(!onAuthStatCalled) {
-                    //console.log(name, email, password);
-                    const url = `/account/create/${name}/${email}/${password}`;
-                    (async () => {
-                        var res = await fetch(url);
-                        var data = await res.json();
-                        setCtx({user:data});
-                        console.log("ctx is: ");
-                        console.log(context.myUser);
-                    })();
-                    setShow(false);
-                }
-                onAuthStatCalled = true;
-            }
-            else {
-                console.log('User is not logged in');
-            }
-        })
+        // let onAuthStatCalled = false;
+        // firebase.auth().onAuthStateChanged(user => {
+        //     if (user) {
+        //         if(!onAuthStatCalled) {
+        //             //console.log(name, email, password);
+        //             const url = `/account/create/${name}/${email}/${password}`;
+        //             (async () => {
+        //                 var res = await fetch(url);
+        //                 var data = await res.json();
+        //                 setCtx({user:data});
+        //                 console.log("ctx is: ");
+        //                 console.log(context.myUser);
+        //             })();
+        //             setShow(false);
+        //         }
+        //         onAuthStatCalled = true;
+        //     }
+        //     else {
+        //         console.log('User is not logged in');
+        //     }
+        // })
     }
 
     return (

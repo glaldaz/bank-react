@@ -4,7 +4,6 @@ const UserContext = React.createContext('');
 function NavBar(){
   const context = React.useContext(UserContext);
   const ctx = context.myUser;
-  const setCtx = context.setMyUser;
     return(
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <a className="navbar-brand" href="#">BadBank</a>
@@ -32,13 +31,13 @@ function NavBar(){
               <a className="nav-link" href="#/balance/">{ctx.user.name}</a>
             </li>}
             {ctx.user &&<li className="nav-item">
-              <a className="nav-link" href="">Sign Out</a>
+              <a className="nav-link" href="#/signout">Sign Out</a>
             </li>}
             {!(ctx.user) && <li className="nav-item">
               <a className="nav-link" href="#/login/">Login</a>
             </li>}
             {!(ctx.user) && <li className="nav-item">
-              <a className="nav-link" href="#/CreateAccount/">Create Account</a>
+              <a className="nav-link" href="#/createaccount/">Create Account</a>
             </li>}
           </ul>
         </div>

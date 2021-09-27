@@ -31,6 +31,7 @@ function Card(props){
                     handle={props.handle}
                 ></CreateForm> :
                 <CreateMsg
+                    autoFire={props.autoFire}
                     setShow={setShow}
                     successText={props.successText}
                     showBalance={props.showBalance}
@@ -44,21 +45,24 @@ function Card(props){
 }
 
 function CreateMsg(props) {
-    const showBalance = props.showBalance;
     const context = React.useContext(UserContext);
     const ctx = context.myUser.user;
+
+
+    if(props.successMessage === 'Signing Out...') props.autoFire();
 
     return(<>
             <h5>{props.successMessage}</h5>
 
-            {showBalance &&
+            {props.showBalance &&
                 <div>
                     Your balance is: ${ctx.balance}<br/><br/>
                 </div>}
-
+            
+            {props.successButton &&
             <button type="submit" 
                 className="btn btn-light" 
-                onClick={() => props.setShow(true)}>{props.successButton}</button>
+                onClick={() => props.setShow(true)}>{props.successButton}</button>}
         </>)
 }
 

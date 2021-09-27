@@ -8,6 +8,7 @@ function Spa(){
                     <div className="container" style={{padding: "20px"}}>
                         <Rout path="/"         exact component={Home}/>
                         <Rout path="/createaccount/" component={CreateAccount}/>
+                        <Rout path="/signout"        component={Signout}/>
                         <Rout path="/login/"         component={Login}/>
                         <Rout path="/deposit/"       component={Deposit}/>
                         <Rout path="/withdraw/"      component={Withdraw}/>
