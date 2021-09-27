@@ -5,7 +5,6 @@ function Login() {
     const header = "Login";
     const buttonText = "Login";
     const successMessage = "You have successfully logged in.";
-    const successButton = "Sign out";
     const context = React.useContext(UserContext);
     const setCtx = context.setMyUser;
 
@@ -73,7 +72,6 @@ function Login() {
             buttonText={buttonText}
             handle={handle}
             successMessage={successMessage}
-            successButton={successButton}
         />
     )
 }

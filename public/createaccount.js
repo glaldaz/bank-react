@@ -5,10 +5,9 @@ function CreateAccount(){
     const [email, setEmail]       = React.useState('');
     const [password, setPassword] = React.useState('');
     const [show, setShow]         = React.useState(true);
-    const header = "header"
+    const header = "Create Account"
     const buttonText = "Create Account";
     const successMessage = "You have successfully created your Account.";
-    const successButton = "Add another account";
 
     const context = React.useContext(UserContext);
     const setCtx = context.setMyUser;
@@ -45,29 +44,6 @@ function CreateAccount(){
             .catch( error => {
                 console.log('User is not logged in');
             })
-        
-        // login state
-        // let onAuthStatCalled = false;
-        // firebase.auth().onAuthStateChanged(user => {
-        //     if (user) {
-        //         if(!onAuthStatCalled) {
-        //             //console.log(name, email, password);
-        //             const url = `/account/create/${name}/${email}/${password}`;
-        //             (async () => {
-        //                 var res = await fetch(url);
-        //                 var data = await res.json();
-        //                 setCtx({user:data});
-        //                 console.log("ctx is: ");
-        //                 console.log(context.myUser);
-        //             })();
-        //             setShow(false);
-        //         }
-        //         onAuthStatCalled = true;
-        //     }
-        //     else {
-        //         console.log('User is not logged in');
-        //     }
-        // })
     }
 
     return (
@@ -82,7 +58,6 @@ function CreateAccount(){
             buttonText={buttonText}
             handle={handle}
             successMessage={successMessage}
-            successButton={successButton}
         />
     )
 }
