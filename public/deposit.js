@@ -1,17 +1,23 @@
 function Deposit() {
-    const [deposit, setDeposit]       = React.useState('');
-    const [show, setShow]         = React.useState(true);
+    const [deposit, setDeposit] = React.useState('');
+    const [show, setShow]       = React.useState(true);
+    const showBalance = true;
+    const header = "Deposit"
     const buttonText = "Deposit";
     const successMessage = "You have successfully made a deposit.";
     const successButton = "Make another deposit";
+    const context = React.useContext(UserContext);
+    const email = context.myUser.user.email;
+    const setCtx = context.setMyUser;
 
     const handle = function() {
-        // const url = `/account/create/${name}/${email}/${password}`;
-        // (async () => {
-        //     var res = await fetch(url);
-        //     var data = await res.json();
-        //     console.log(data);
-        // })();
+        const url = `/account/deposit/${email}/${deposit}`;
+        (async () => {
+            var res = await fetch(url);
+            var data = await res.json();
+            console.log(data);
+            setCtx({user:data});
+        })();
         clearForm();
         setShow(false);
     }
@@ -19,7 +25,8 @@ function Deposit() {
     return (
         <Card
             bgcolor="primary"
-            header="Login"
+            header={header}
+            showBalance = {showBalance}
             deposit={[deposit, setDeposit, true]}
             show={[show, setShow]}
             showSubmit={true}

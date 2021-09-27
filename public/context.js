@@ -24,6 +24,8 @@ function Card(props){
                     email={props.email}
                     password={props.password}
                     deposit={props.deposit}
+                    withdrawal={props.withdrawal}
+                    showBalance={props.showBalance}
                     showSubmit={props.showSubmit}
                     buttonText={props.buttonText}
                     handle={props.handle}
@@ -50,12 +52,16 @@ function CreateMsg(props) {
 }
 
 function CreateForm(props) {
-    const [name,     setName,     showName]     = (props.name     ? props.name     : [null,null,false]);
-    const [email,    setEmail,    showEmail]    = (props.email    ? props.email    : [null,null,false]);
-    const [password, setPassword, showPassword] = (props.password ? props.password : [null,null,false]);
-    const [deposit,  setDeposit,  showDeposit]  = (props.deposit  ? props.deposit  : [null,null,false]);
+    const [name,       setName,       showName]       = (props.name       ? props.name       : [null, null, false]);
+    const [email,      setEmail,      showEmail]      = (props.email      ? props.email      : [null, null, false]);
+    const [password,   setPassword,   showPassword]   = (props.password   ? props.password   : [null, null, false]);
+    const [deposit,    setDeposit,    showDeposit]    = (props.deposit    ? props.deposit    : [null, null, false]);
+    const [withdrawal, setWithdrawal, showWithdrawal] = (props.withdrawal ? props.withdrawal : [null, null, false]);
+    const showBalance = props.showBalance;
     const showSubmit = props.showSubmit;
     const buttonText = props.buttonText;
+    const context = React.useContext(UserContext);
+    const ctx = context.myUser.user;
 
     return (<>
         {showName &&
@@ -88,6 +94,11 @@ function CreateForm(props) {
                 onChange={e => setPassword(e.currentTarget.value)} /><br/>
         </div>}
 
+        {showBalance &&
+        <div>
+            Your balance is: {ctx.balance}
+        </div>}
+
         {showDeposit &&
         <div>
             Deposit<br/>
@@ -97,7 +108,16 @@ function CreateForm(props) {
                 value={deposit}
                 onChange={e => setDeposit(e.currentTarget.value)} /><br/>
         </div>}
-        
+
+        {showWithdrawal &&
+        <div>
+            Withdrawal<br/>
+            <input type="input"
+                className="form-control"
+                placeholder="Enter withdrawal Amount"
+                value={withdrawal}
+                onChange={e => setWithdrawal(e.currentTarget.value)} /><br/>
+        </div>}
 
         {showSubmit &&
         <div>

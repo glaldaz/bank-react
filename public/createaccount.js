@@ -5,6 +5,7 @@ function CreateAccount(){
     const [email, setEmail]       = React.useState('');
     const [password, setPassword] = React.useState('');
     const [show, setShow]         = React.useState(true);
+    const header = "header"
     const buttonText = "Create Account";
     const successMessage = "You have successfully created your Account.";
     const successButton = "Add another account";
@@ -56,7 +57,7 @@ function CreateAccount(){
     return (
         <Card
             bgcolor="primary"
-            header="Create Account"
+            header={header}
             name = {[name, setName, true]}
             email={[email, setEmail, true]}
             password={[password, setPassword, true]}

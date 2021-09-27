@@ -2,6 +2,7 @@ function Login() {
     const [email, setEmail]       = React.useState('');
     const [password, setPassword] = React.useState('');
     const [show, setShow]         = React.useState(true);
+    const header = "Login";
     const buttonText = "Login";
     const successMessage = "You have successfully logged in.";
     const successButton = "Sign out";
@@ -49,7 +50,7 @@ function Login() {
     return (
         <Card
             bgcolor="primary"
-            header="Login"
+            header={header}
             email={[email, setEmail, true]}
             password={[password, setPassword, true]}
             show={[show, setShow]}

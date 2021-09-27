@@ -23,14 +23,39 @@ function create(name, email, password) {
 
 // one user
 function one(passedEmail) {
-    //console.log(passedEmail);
     return new Promise((resolve, reject) => {
         const customer = db
-        .collection('users')
-        .find({email:(passedEmail)})
-        .toArray(function(err, docs) {
-            err ? reject(err) : resolve(docs[0]);
-        });
+            .collection('users')
+            .find({ email: (passedEmail) })
+            .toArray(function(err, docs) {
+                err ? reject(err) : resolve(docs[0]);
+            });
+    });
+}
+
+// deposit
+function deposit(passedEmail, passedDeposit) {
+    return new Promise((resolve, reject) => {
+        passedDeposit = Number(passedDeposit);
+        const customer = db
+            .collection('users')
+            .findOneAndUpdate({ email: (passedEmail) }, { $inc: {balance: (passedDeposit) }}, { upsert: true, returnDocument: 'after' },
+                function (err, doc) {
+                    err ? reject(err) : resolve(doc.value);
+                });
+    });
+}
+
+// withdrawal
+function withdrawal(passedEmail, passedWithdrawal) {
+    return new Promise((resolve, reject) => {
+        passedWithdrawal = -1 * Number(passedWithdrawal);
+        const customer = db
+            .collection('users')
+            .findOneAndUpdate({ email: (passedEmail) }, { $inc: {balance: (passedWithdrawal) }}, { upsert: true, returnDocument: 'after' },
+                function (err, doc) {
+                    err ? reject(err) : resolve(doc.value);
+                });
     });
 }
 
@@ -46,4 +71,4 @@ function all() {
     });
 }
 
-module.exports = {create, one, all};
+module.exports = {create, one, deposit, withdrawal, all};
