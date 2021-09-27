@@ -33,6 +33,7 @@ function Card(props){
                 <CreateMsg
                     setShow={setShow}
                     successText={props.successText}
+                    showBalance={props.showBalance}
                     successMessage={props.successMessage}
                     successButton={props.successButton}
                 ></CreateMsg>}
@@ -43,8 +44,18 @@ function Card(props){
 }
 
 function CreateMsg(props) {
+    const showBalance = props.showBalance;
+    const context = React.useContext(UserContext);
+    const ctx = context.myUser.user;
+
     return(<>
             <h5>{props.successMessage}</h5>
+
+            {showBalance &&
+                <div>
+                    Your balance is: ${ctx.balance}<br/><br/>
+                </div>}
+
             <button type="submit" 
                 className="btn btn-light" 
                 onClick={() => props.setShow(true)}>{props.successButton}</button>
