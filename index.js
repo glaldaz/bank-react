@@ -17,11 +17,41 @@ app.get('/account/create/:name/:email/:password', function (req, res) {
         });
 });
 
+// log in
+app.get('/account/one/:email', function (req, res) {
+    dal.one(req.params.email)
+        .then((doc) => {
+            //console.log(doc);
+            res.send(doc);
+        });
+});
+
+//deposit
+app.get('/account/deposit/:email/:deposit', function (req, res) {
+    dal.deposit(req.params.email, req.params.deposit)
+        .then((doc) => {
+            //console.log(doc);
+            res.send(doc);
+        })
+        .catch((error) => {
+            res.send(null);
+        });
+});
+
+//withdrawal
+app.get('/account/withdrawal/:email/:withdrawal', function (req, res) {
+    dal.withdrawal(req.params.email, req.params.withdrawal)
+        .then((doc) => {
+            //console.log(doc);
+            res.send(doc);
+        });
+});
+
 // all accounts
 app.get('/account/all', function (req, res) {
     dal.all()
         .then((docs) => {
-            console.log(docs);
+            //console.log(docs);
             res.send(docs);
         });
 });
