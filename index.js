@@ -32,6 +32,9 @@ app.get('/account/deposit/:email/:deposit', function (req, res) {
         .then((doc) => {
             //console.log(doc);
             res.send(doc);
+        })
+        .catch((error) => {
+            res.send(null);
         });
 });
 

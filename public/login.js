@@ -37,28 +37,6 @@ function Login() {
             .catch((error) => {
                 console.log('User is not logged in');
             })
-
-        // login state
-        // let onAuthStatCalled = false;
-        // firebase.auth().onAuthStateChanged(user => {
-        //     if (user) {
-        //         if(!onAuthStatCalled) {
-        //             const url = `/account/one/${email}`;
-        //             (async () => {
-        //                 var res = await fetch(url);
-        //                 var data = await res.json();
-        //                 console.log(data);
-        //                 setCtx({user:data});
-        //             })();
-        //             setShow(false);
-        //             clearForm();
-        //         }
-        //         onAuthStatCalled = true;
-        //     }
-        //     else {
-        //         console.log('User is not logged in');
-        //     }
-        // })
     }
 
     return (

@@ -25,6 +25,7 @@ function Card(props){
                     password={props.password}
                     deposit={props.deposit}
                     withdrawal={props.withdrawal}
+                    transfer={props.transfer}
                     showBalance={props.showBalance}
                     showSubmit={props.showSubmit}
                     buttonText={props.buttonText}
@@ -72,13 +73,13 @@ function CreateForm(props) {
     const [password,   setPassword,   showPassword]   = (props.password   ? props.password   : [null, null, false]);
     const [deposit,    setDeposit,    showDeposit]    = (props.deposit    ? props.deposit    : [null, null, false]);
     const [withdrawal, setWithdrawal, showWithdrawal] = (props.withdrawal ? props.withdrawal : [null, null, false]);
+    const [transfer,   setTransfer,   showTransfer]   = (props.transfer   ? props.transfer   : [null, null, false]);
     const showBalance = props.showBalance;
     const showSubmit = props.showSubmit;
     const buttonText = props.buttonText;
     const context = React.useContext(UserContext);
     const ctx = context.myUser.user;
 
-    console.log("showBalance is: " + showBalance);
     return (<>
         {showName &&
         <div>
@@ -89,6 +90,14 @@ function CreateForm(props) {
                 value={name}
                 onChange={e => setName(e.currentTarget.value)} /><br/>
         </div>}
+
+        {showBalance &&
+        <div>
+            Your balance is: ${ctx.balance}<br/><br/>
+        </div>}
+
+        {showTransfer &&
+            <div>Enter the email of the receiver: <br/><br/></div>}
         
         {showEmail &&
         <div>
@@ -110,11 +119,6 @@ function CreateForm(props) {
                 onChange={e => setPassword(e.currentTarget.value)} /><br/>
         </div>}
 
-        {showBalance &&
-        <div>
-            Your balance is: ${ctx.balance}<br/><br/>
-        </div>}
-
         {showDeposit &&
         <div>
             Deposit<br/>
@@ -133,6 +137,16 @@ function CreateForm(props) {
                 placeholder="Enter withdrawal Amount"
                 value={withdrawal}
                 onChange={e => setWithdrawal(e.currentTarget.value)} /><br/>
+        </div>}
+
+        {showTransfer &&
+        <div>
+            Transfer<br/>
+            <input type="input"
+                className="form-control"
+                placeholder="Enter transfer Amount"
+                value={transfer}
+                onChange={e => setTransfer(e.currentTarget.value)} /><br/>
         </div>}
 
         {showSubmit &&

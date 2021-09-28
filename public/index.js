@@ -12,6 +12,7 @@ function Spa(){
                         <Rout path="/login/"         component={Login}/>
                         <Rout path="/deposit/"       component={Deposit}/>
                         <Rout path="/withdraw/"      component={Withdraw}/>
+                        <Rout path="/transfer/"      component={Transfer}/>
                         <Rout path="/balance/"       component={Balance}/>
                         <Rout path="/alldata"        component={AllData}/>
                     </div>
